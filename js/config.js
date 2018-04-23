@@ -3,7 +3,39 @@ initPages();
 
 document.getElementById("button").addEventListener("click", saveInput);
 document.getElementById("clear").addEventListener("click", clearAll);
+document.getElementById("export").addEventListener("click", exportConfig);
+document.getElementById("import").addEventListener("click", importConfig);
 
+function exportConfig() {
+    var text = JSON.stringify(pageArray);
+    var MIME_TYPE = 'text/plain';
+
+    window.URL = window.webkitURL || window.URL;
+
+    var bb = new Blob([text], {type: MIME_TYPE});
+
+    var a = document.createElement('a');
+    a.download = 'config.json';
+    a.href = window.URL.createObjectURL(bb);
+    a.textContent = 'Download ready';
+    a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(':');
+    a.click();
+}
+
+function importConfig() {
+    var file = $("#configFile")[0].files[0];
+    var reader = new FileReader();
+
+    //将文件以文本形式读入页面
+    reader.readAsText(file);
+    reader.onload = function (e) {
+        var text = e.currentTarget.result;
+        pageArray = JSON.parse(text);
+        $('#fileModal').modal('hide');
+        initDom();
+        saveInput();
+    }
+}
 
 function saveInput() {
     pageArray = [];
@@ -19,6 +51,10 @@ function saveInput() {
 
 function savePages(pages) {
     chrome.storage.sync.set({pages: pages});
+}
+
+function change(key) {
+    alert(key)
 }
 
 function clearAll() {
@@ -42,14 +78,20 @@ function initPages() {
 
 function initDom() {
     var container = document.getElementById("pageContainer");
-    var li = '';
+    var div = '';
     console.log(pageArray);
     console.log(pageArray.length);
     if (pageArray.length > 0) {
         pageArray.forEach(function (value) {
-            li = li + "<li><input type='text' value='" + value + "' class='page'></li>";
+            div = div + " <div class='col-xs-3 col-sm-3'>" +
+                "<img class='thumbnail' src='" + value + "'>" +
+                "<input  class='page form-control' value='" + value + "'>" +
+                "</div>";
         })
     }
-    li = li + "<li><input type='text' class='page'></li>";
-    container.innerHTML = li;
+    div = div + " <div class='col-xs-3 col-sm-3'>" +
+        "<img class='thumbnail add_more' src='../images/ic_add_white_24px.svg'>" +
+        "<input  class='page form-control' value=''>" +
+        "</div>";
+    container.innerHTML = div;
 }

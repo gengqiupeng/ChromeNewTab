@@ -1,4 +1,32 @@
-html {
-    background: url(../image/1.jpg) no-repeat center center fixed;
-    background-size: cover;
+img{
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+}
+.thumbnail {
+    margin-bottom: 4px;
+    margin-top: 10px;
+}
+.form-control{
+  width: 150px;
+}
+
+.add_more{
+    background: #acacac;
+}
+
+.pageContainer{
+    margin: 10px;
+}
+
+.action{
+ padding: 15px;
+}
+
+.modal-content{
+    padding: 10px;
+}
+
+#import{
+    margin-top: 10px;
 }

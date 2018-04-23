@@ -4,16 +4,31 @@
     <meta charset="UTF-8">
     <title>The Last Of Us</title>
 </head>
-<body style="width: 200px">
-<h1>祝您使用愉快11 :)</h1>
-<div >
-    <ul class="pageContainer" id="pageContainer">
-    </ul>
+<body style="width: 650px;margin: 20px">
+<div class="row pageContainer" id="pageContainer">
+
 </div>
-<input type="button" value="保存" id="button">
-<input type="button" value="清空" id="clear">
+<div class="action pageContainer">
+    <button class="btn btn-primary" id="button"> 保存</button>
+    <button class="btn btn-primary" id="export"> 导出配置</button>
+    <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm"> 导入配置</button>
+    <button class="btn btn-danger" id="clear">清空</button>
+</div>
 </body>
 
+<div class="modal fade bs-example-modal-sm" id="fileModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <h1>选择你要导入的配置文件</h1>
+            <input type="file" id="configFile">
+            <button class="btn btn-primary" id="import"> 确认导入</button>
+        </div>
+    </div>
+</div>
 <script src="js/jquery-1.12.3.min.js"></script>
+<script src="boot/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="boot/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/image.css">
+
 <script src="js/config.js"></script>
 </html>
