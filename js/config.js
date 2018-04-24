@@ -4,7 +4,7 @@ initPages();
 document.getElementById("button").addEventListener("click", saveInput);
 document.getElementById("clear").addEventListener("click", clearAll);
 document.getElementById("export").addEventListener("click", exportConfig);
-document.getElementById("import").addEventListener("click", importConfig);
+document.getElementById("import").addEventListener("change", importConfig);
 
 function exportConfig() {
     var text = JSON.stringify(pageArray);
@@ -23,7 +23,7 @@ function exportConfig() {
 }
 
 function importConfig() {
-    var file = $("#configFile")[0].files[0];
+    var file = $("#import")[0].files[0];
     var reader = new FileReader();
 
     //将文件以文本形式读入页面
@@ -50,12 +50,10 @@ function saveInput() {
 }
 
 function savePages(pages) {
-    chrome.storage.sync.set({pages: pages});
+    pages = JSON.stringify(pages);
+    localStorage.setItem("page", pages);
 }
 
-function change(key) {
-    alert(key)
-}
 
 function clearAll() {
     var r = confirm("是否删除所有页面？删除后无法恢复!");
@@ -64,16 +62,11 @@ function clearAll() {
         pageArray = [];
         initPages();
     }
-
 }
 
 function initPages() {
-    chrome.storage.sync.get('pages', function (data) {
-        if (data.pages instanceof Array) {
-            pageArray = data.pages
-        }
-        initDom();
-    });
+    pageArray = getPageArray();
+    initDom();
 }
 
 function initDom() {

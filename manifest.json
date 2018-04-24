@@ -7,14 +7,19 @@
     "default_icon": "icon.png",
     "default_popup": "index.html"
   },
+  "options_page": "index.html",
+  "icons": {
+    "16": "icon.png"
+  },
   "permissions": [
     "tabs",
     "management",
     "storage",
-    "<all_urls>"
+    "<all_urls>",
+    "contextMenus"
   ],
-  "chrome_url_overrides":{
-    "newtab":"image.html"
+  "chrome_url_overrides": {
+    "newtab": "image.html"
   },
   "content_scripts": [
     {
@@ -30,5 +35,10 @@
       ]
     }
   ],
+  "background": {
+    "scripts": [
+      "js/context.js"
+    ]
+  },
   "content_security_policy": "script-src 'self' https://example.com; object-src 'self'"
 }

@@ -7,7 +7,7 @@ initPages();
 
 function getRandomInt() {
     var min = Math.ceil(0);
-    var max = Math.floor(pageArray.length-1);
+    var max = Math.floor(pageArray.length - 1);
     return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 }
 
@@ -23,15 +23,11 @@ function getRandomImage() {
 
 
 function initPages() {
-    chrome.storage.sync.get('pages', function (data) {
-        if (data.pages instanceof Array) {
-            pageArray = data.pages
-        }
-        initBackGround()
-    });
+    pageArray = getPageArray();
+    initBackGround()
 }
 
-function initBackGround(){
+function initBackGround() {
     $("html").css("background", "url(" + getRandomImage() + ")  no-repeat center fixed");
     $("html").css("background-size", "cover");
 }
