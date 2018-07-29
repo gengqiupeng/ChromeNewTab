@@ -14,8 +14,8 @@ function getRandomInt() {
 function getRandomImage() {
     console.log(pageArray)
     var index = getRandomInt();
-    if (index < 0) {
-        return "http://tab.beiliji.online/TheLastOfUs/index.php"
+    if (index < 1) {
+        return "https://images5.alphacoders.com/408/thumb-1920-408539.jpg"
     } else {
         return pageArray[index];
     }

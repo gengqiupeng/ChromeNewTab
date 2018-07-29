@@ -1,8 +1,8 @@
 {
-  "name": "TheLastOfUs",
+  "name": "图片标签页",
   "version": "0.1.0",
   "manifest_version": 2,
-  "description": "最后的生还者标签图片",
+  "description": "使用自定义的图片作为新标签页",
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "index.html"
